@@ -3,7 +3,7 @@ create table if not exists roles (id   int  generated always as identity primary
 
 create unique index if not exists idx_unq_roles on roles (name);
                                  
-grant select on roles to role_guest;
-grant select on roles to role_user;
-grant select on roles to role_org;
-grant select on roles to role_admin;
+grant select on roles to role_guest
+                        ,role_user
+                        ,role_org
+                        ,role_admin;

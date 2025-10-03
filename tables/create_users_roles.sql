@@ -8,7 +8,7 @@ create index if not exists idx_users_roles     on users_roles (users_id);
 create index if not exists idx2_users_roles    on users_roles (roles_id);
 create index if not exists idx_unq_users_roles on users_roles (users_id, roles_id);
 
-grant select                 on roles to role_guest;
-grant select                 on roles to role_user;
-grant select                 on roles to role_org;
+grant select on roles to role_guest
+                        ,role_user
+                        ,role_org;
 grant select, insert, update on roles to role_admin;
