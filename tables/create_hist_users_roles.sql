@@ -3,6 +3,7 @@ create table if not exists hist_users_roles (id             int         generate
                                             ,users_roles_id int         not null                                   --идентификатор связи пользователя с ролью (users_roles.id)
                                             ,users_id       int         not null
                                             ,roles_id       int         not null
+                                            ,date_action    daterange   not null 
                                             ,granted_at     timestamptz not null
                                             ,granted_by     int         not null);
 

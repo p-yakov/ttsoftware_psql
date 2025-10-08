@@ -8,12 +8,14 @@ begin
                                  ,users_roles_id
                                  ,users_id
                                  ,roles_id
+                                 ,date_action
                                  ,granted_at
                                  ,granted_by)
     values ('I'
            ,new.users_roles_id
            ,new.users_id
            ,new.roles_id
+           ,new.date_action
            ,new.granted_at
            ,new.granted_by);
 
@@ -25,12 +27,14 @@ begin
                                  ,users_roles_id
                                  ,users_id
                                  ,roles_id
+                                 ,date_action
                                  ,granted_at
                                  ,granted_by)
     values ('U'
            ,old.users_roles_id
            ,old.users_id
            ,old.roles_id
+           ,old.date_action
            ,old.granted_at
            ,old.granted_by);
 
@@ -42,12 +46,14 @@ begin
                                  ,users_roles_id
                                  ,users_id
                                  ,roles_id
+                                 ,date_action
                                  ,granted_at
                                  ,granted_by)
     values ('D'
            ,old.users_roles_id
            ,old.users_id
            ,old.roles_id
+           ,old.date_action
            ,old.granted_at
            ,old.granted_by);
 
