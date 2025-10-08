@@ -15,29 +15,29 @@ as $$
 **********************************************************************/
 begin
   if coalesce(v_login, '') = '' then
-    v_code = 1;
+    v_code = 3;
     return;
   end if;
 
   if coalesce(v_password, '') = '' then
-    v_code = 2;
+    v_code = 1;
     return;
   end if;
 
   if exists (select 1 
                from users
               where login = v_login) then
-    v_code = 3;
-    return;
-  end if;
-
-  if length(v_login) > 64 then
     v_code = 4;
     return;
   end if;
 
-  if length(v_password) > 64 then
+  if length(v_login) > 64 then
     v_code = 5;
+    return;
+  end if;
+
+  if length(v_password) > 64 then
+    v_code = 2;
     return;
   end if;
 

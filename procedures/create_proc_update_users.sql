@@ -22,12 +22,12 @@ begin
   end if;
   
   if coalesce(v_password, '') = '' then
-    v_code = 2;
+    v_code = 1;
     return;
   end if;
 
   if length(v_password) > 64 then
-    v_code = 5;
+    v_code = 2;
     return;
   end if;
 
