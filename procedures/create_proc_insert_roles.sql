@@ -1,5 +1,4 @@
-create or replace procedure proc_insert_roles (v_name     text
-                                              ,out v_code int)
+create or replace procedure proc_insert_roles (v_name text)
 language plpgsql
 as $$
 /**********************************************************************
@@ -7,19 +6,19 @@ as $$
 
 Входные параметры:
  v_name - наименование
-
-Возвращает:
- v_code - номер ошибки или 0
 **********************************************************************/
 begin
   if coalesce(v_name, '') = '' then
-    v_code = 6;
-    return;
+    raise exception 'Наименование роли не задано';
+  end if;
+
+  if exists (select 1 from roles where name = v_name) then
+    raise exception 'Роль "%" уже существует', v_name;
   end if;
 
   insert into roles (name)
   values (v_name);
-  
-  v_code := 0;
+exception 
+  when others then raise exception 'Ошибка при добавлении записей в таблицу roles: %', sqlerrm;
 end
 $$;
