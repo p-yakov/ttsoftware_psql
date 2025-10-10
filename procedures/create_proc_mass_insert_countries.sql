@@ -4,8 +4,9 @@ as $$
 /**********************************************************************
 Процедура для массовой вставки записей (стран, субъектов, городов и т.д.) в таблицу countries
 
-Входная таблица temp_countries (name      text not null  --наименование
-                               ,parent_id int  not null) --идентификатор родителя
+Входная таблица temp_countries (name              text not null  --наименование
+                               ,parent_id         int  not null  --идентификатор родителя
+                               ,countries_type_id int  not null) --идентификатор объекта
 **********************************************************************/
 declare v_duplicate text;
 
@@ -23,8 +24,9 @@ begin
     into v_duplicate
     from temp_countries t
     join countries c
-      on c.name      = t.name
-     and c.parent_id = t.parent_id
+      on c.name              = t.name
+     and c.parent_id         = t.parent_id
+     and c.countries_type_id = t.countries_type_id
     join countries p
       on p.id = t.parent_id;
         
@@ -33,9 +35,11 @@ begin
   end if;
   
 	insert into countries(name
-                       ,parent_id)
+                       ,parent_id
+                       ,countries_type_id)
 	select name
         ,parent_id
+        ,countries_type_id
 	  from temp_countries;
 exception 
   when others then raise exception 'Ошибка при добавлении записей в таблицу countries: %', sqlerrm;
