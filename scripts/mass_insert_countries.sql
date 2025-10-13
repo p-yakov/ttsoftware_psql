@@ -1,5 +1,7 @@
-create temp table if not exists temp_countries (name      text not null   --наименование
-                                               ,parent_id int  not null); --идентификатор родителя
+drop table if exists temp_countries;
+create temp table temp_countries (name      text not null   --наименование
+                                 ,parent_id int  not null); --идентификатор родителя
+                                 
 do $$
 declare v_parent_id int := 0;
         elem        json;
