@@ -10,5 +10,4 @@
 6. Выполняем functions/*.sql
 7. Выполняем triggers/*.sql
 8. Выполняем procedures/*.sql
-9. Выполняем scripts/mass_insert_errors_for_users.sql
-             scripts/insert_users_p-yakov.sql
+9. Выполняем scripts/*.sql

@@ -1,1 +1,0 @@
-alter table countries add column if not exists countries_type_id int null;

@@ -1,23 +1,26 @@
-create or replace procedure proc_update_roles (v_id int
-                                              ,v_name text)
+create or replace procedure proc_update_roles (v_id   smallint
+                                              ,v_name varchar(16))
 language plpgsql
 as $$
 /**********************************************************************
 Процедура для обновления записи в таблице roles
 
 Входные параметры:
- v_id   - идентификатор роли
+ v_id   - идентификатор в таблице
  v_name - наименование
 **********************************************************************/
 begin
-  if coalesce(v_name, '') = '' then
-    raise exception 'Наименование роли не задано';
-  end if;
+  v_id   := coalesce(v_id, 0);
+  v_name := coalesce(trim(v_name), '');
 
   if not exists (select 1 
                   from roles 
                  where id = v_id) then
-    raise exception 'Роль не найдена';
+    raise exception 'Роль с идентификатором "%" не найдена', v_id;
+  end if;
+
+  if v_name = '' then
+    raise exception 'Наименование роли не задано';
   end if;
 
   if exists (select 1

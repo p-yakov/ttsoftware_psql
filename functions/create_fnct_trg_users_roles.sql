@@ -12,7 +12,7 @@ begin
                                  ,granted_at
                                  ,granted_by)
     values ('I'
-           ,new.users_roles_id
+           ,new.id
            ,new.users_id
            ,new.roles_id
            ,new.date_action
@@ -31,7 +31,7 @@ begin
                                  ,granted_at
                                  ,granted_by)
     values ('U'
-           ,old.users_roles_id
+           ,old.id
            ,old.users_id
            ,old.roles_id
            ,old.date_action
@@ -50,7 +50,7 @@ begin
                                  ,granted_at
                                  ,granted_by)
     values ('D'
-           ,old.users_roles_id
+           ,old.id
            ,old.users_id
            ,old.roles_id
            ,old.date_action
