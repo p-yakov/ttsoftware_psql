@@ -1,5 +1,5 @@
 create or replace procedure proc_update_users (v_id       int
-                                              ,v_password varchar(64))
+                                              ,v_password char(60))
 language plpgsql
 as $$
 /**********************************************************************
@@ -10,18 +10,17 @@ as $$
  v_password - пароль
 **********************************************************************/
 begin
+  v_id       := coalesce(v_id, 0);
+  v_password := coalesce(trim(v_password), '');
+
   if not exists (select 1 
                    from users 
                   where id = v_id) then
-    raise exception 'Логин не найден';
+    raise exception 'Пользователь с идентификатором "%" не найден', v_id;
   end if;
   
-  if coalesce(v_password, '') = '' then
+  if v_password = '' then
     raise exception 'Пароль не задан';
-  end if;
-
-  if length(v_password) > 64 then
-    raise exception 'Длина пароля состовляет более 64 симовлов';
   end if;
 
   update users
@@ -32,6 +31,6 @@ exception
 end
 $$;
 
-grant execute on procedure proc_update_users (int, varchar) to role_user
-                                                              ,role_org
-                                                              ,role_admin;
+grant execute on procedure proc_update_users (int, char) to role_user
+                                                           ,role_org
+                                                           ,role_admin;
